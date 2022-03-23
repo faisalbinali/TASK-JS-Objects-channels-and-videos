@@ -39,9 +39,8 @@ function numberOfVideos(channel) {
  *
  * BONUS: use iteration method `.some()`
  ****************************************************************/
-function channelHasVideo(videoTitle, channel) {
-  const a = (video) => video === video;
-  return channel.videos.some(a);
+function channelHasVideo(videoTitle, channels) {
+  return channels.videos.some((channel) => channel.title === videoTitle);
 }
 
 //console.log(channelHasVideo("The Universal S", channels[0]));
@@ -70,8 +69,7 @@ function getChannelByName(channelName, channels) {
  * BONUS: use iteration methods `.find()` and `.some()`
  ****************************************************************/
 function getChannelByVideoTitle(videoTitle, channels) {
-  const b = channels.find((channel) => channel.videos.title === videoTitle);
-  return b;
+  return channels.find((channel) => channelHasVideo(videoTitle, channel));
 }
 //console.log(getChannelByVideoTitle("The Universal S", channels));
 
@@ -84,17 +82,12 @@ function getChannelByVideoTitle(videoTitle, channels) {
  * Hint: use string method `.includes()` and iteration method `.filter()`
  ****************************************************************/
 function searchChannels(query, channels) {
-  let result1 = channels.filter((channel) =>
-    channel.description.includes(query)
+  return channels.filter(
+    (channel) =>
+      channel.description.includes(query) || channel.name.includes(query)
   );
-  let result2 = channels.filter((channel) => channel.name.includes(query));
-  let result3 = {
-    ...result1,
-    ...result2,
-  };
-  return [];
 }
-console.log(searchChannels("the", channels));
+//console.log(searchChannels("the", channels));
 
 module.exports = {
   getChannelName,
